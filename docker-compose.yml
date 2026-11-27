@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: shopnest-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-shopnest}
+      POSTGRES_USER: ${DB_USER:-shopnest}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-shopnest}
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - shopnest-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-shopnest} -d ${DB_NAME:-shopnest}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  shopnest-pgdata:
