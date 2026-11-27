@@ -25,4 +25,20 @@ Admins can manage products, categories, stock and orders.
 
 ## Getting Started
 
-_Setup instructions will be added as the project progresses._
+### Prerequisites
+- Java 21
+- Docker Desktop
+
+### Run locally
+```bash
+# 1. Start PostgreSQL
+cp .env.example .env
+docker compose up -d
+
+# 2. Run the backend
+cd backend
+./mvnw spring-boot:run        # Windows: mvnw.cmd spring-boot:run
+```
+
+- API health: http://localhost:8080/actuator/health
+- Swagger UI: http://localhost:8080/swagger-ui.html
